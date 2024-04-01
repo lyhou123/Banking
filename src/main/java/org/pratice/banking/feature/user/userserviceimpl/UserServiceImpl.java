@@ -11,6 +11,7 @@ import org.pratice.banking.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -31,5 +32,32 @@ public class UserServiceImpl implements UserService {
        newUser.setRoles(roles);
        var savedUser=userRepository.save(newUser);
       return userMapper.mapToUserRespone(savedUser);
+    }
+
+    @Override
+    public List<UserRespone> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(userMapper::mapToUserRespone)
+                .toList();
+    }
+    @Override
+    public UserRespone getUserById(String id) {
+        var newProduct=userRepository.findById(id).orElseThrow();// null if not found
+        return userMapper.mapToUserRespone(newProduct);
+    }
+
+    @Override
+    public UserRespone deleteUser(String id) {
+        var user=userRepository.findById(id).orElseThrow();
+        userRepository.delete(user);
+        return userMapper.mapToUserRespone(user);
+    }
+
+    @Override
+    public UserRespone updateUser(String id, UserRequest userRequest) {
+         var newProduct=userRepository.findById(id).orElseThrow();
+         newProduct=userMapper.mapToUser(userRequest);
+         newProduct.setId(id);
+       return userMapper.mapToUserRespone(userRepository.save(newProduct));
     }
 }
