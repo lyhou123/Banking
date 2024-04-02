@@ -75,4 +75,16 @@ public class UserRestController {
         return BaseRespone.<UserRespone>creatSuccess()
                 .setPaylot(userService.updateUser(id,userRequest));
     }
+    @PutMapping("/{id}/enable")
+    public BaseRespone<UserRespone> enableUser(@PathVariable String id)
+    {
+        return BaseRespone.<UserRespone>creatSuccess()
+                .setPaylot(userService.enableUser(id));
+    }
+    @PutMapping("/{id}/disable")
+    public BaseRespone<UserRespone> disableUser(@PathVariable String id)
+    {
+        return BaseRespone.<UserRespone>creatSuccess()
+                .setPaylot(userService.disableUser(id));
+    }
 }

@@ -11,4 +11,6 @@ public interface UserService {
     UserRespone getUserById(String id);
     UserRespone deleteUser(String id);
     UserRespone updateUser(String id, UserRequest userRequest);
+    UserRespone enableUser(String id);
+    UserRespone disableUser(String id);
 }

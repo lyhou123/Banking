@@ -62,4 +62,17 @@ public class UserServiceImpl implements UserService {
          newProduct.setId(id);
        return userMapper.mapToUserRespone(userRepository.save(newProduct));
     }
+
+    @Override
+    public UserRespone enableUser(String id) {
+        var findProduct=userRepository.findById(id).orElseThrow(()->new NoSuchElementException("User not found"));
+        findProduct.setId(id);
+        return userMapper.mapToUserRespone(userRepository.save(findProduct));
+    }
+    @Override
+    public UserRespone disableUser(String id) {
+        var findProduct=userRepository.findById(id).orElseThrow(()->new NoSuchElementException("User not found"));
+        findProduct.setId(id);
+        return userMapper.mapToUserRespone(userRepository.save(findProduct));
+    }
 }
