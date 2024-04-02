@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 @Service
@@ -25,7 +26,8 @@ public class UserServiceImpl implements UserService {
         Set<Role> roles=new HashSet<>();
        for(var role:userRequest.roles())
        {
-           var roleObj=roleRepository.findByName(role).orElseThrow();
+           var roleObj=roleRepository.findByName(role).orElseThrow(()->
+                   new NoSuchElementException("Role not found"));
            roles.add(roleObj);
        }
        User newUser=userMapper.mapToUser(userRequest);

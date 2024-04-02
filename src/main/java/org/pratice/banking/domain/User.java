@@ -2,11 +2,15 @@ package org.pratice.banking.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.validation.annotation.Validated;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -21,15 +25,14 @@ public class User {
     @GeneratedValue(strategy =GenerationType.UUID)
     @Column(updatable = false, nullable = false)
     private String id;
-    @NotEmpty(message = "username is required")
     private String username;
-    @NotEmpty(message = "full name is required")
+
     private String fullName;
-    @NotEmpty(message= "gender is required")
+
     private String gender ;
-    @Size(min = 6, max = 6, message = "pin must be 6 digits")
+
     private String pin;
-    @Email(message = "your must provide a valid email address")
+
     private String email;
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
