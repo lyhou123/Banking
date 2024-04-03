@@ -45,5 +45,11 @@ public class BaseRespone<T> {
                .setStatus(HttpStatus.NOT_FOUND.value())
                .setMessage("Product Not Found");
    }
+   public static <T> BaseRespone <T> updateSuccess()
+   {
+       return new BaseRespone<T>()
+               .setStatus(HttpStatus.OK.value())
+               .setMessage("Update Product Success");
+   }
 
 }

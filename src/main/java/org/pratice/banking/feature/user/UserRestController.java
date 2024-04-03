@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.pratice.banking.feature.user.dto.UserRequest;
 import org.pratice.banking.feature.user.dto.UserRespone;
+import org.pratice.banking.feature.user.dto.UserUpdateRequest;
 import org.pratice.banking.utils.BaseRespone;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +25,11 @@ public class UserRestController {
                             schema = @Schema(implementation = UserRequest.class),
                             examples = @ExampleObject(value = """
                                     {
-                                                                   "username": "sokkhann",
+                                                                   "username": "Lyhou",
                                                                    "fullName": "string",
                                                                    "gender": "male",
                                                                    "pin": "898989",
-                                                                   "email": "sokkhann@gmail.com",
+                                                                   "email": "Lyhou@gmail.com",
                                                                    "password": "string",
                                                                    "profileImage": "string",
                                                                    "phoneNumber": "string",
@@ -70,9 +71,9 @@ public class UserRestController {
                 .setPaylot(userService.deleteUser(id));
     }
     @PutMapping("/{id}")
-    public BaseRespone<UserRespone> updateUser(@PathVariable String id,@RequestBody UserRequest userRequest)
+    public BaseRespone<UserRespone> updateUser(@PathVariable String id,@RequestBody UserUpdateRequest userRequest)
     {
-        return BaseRespone.<UserRespone>creatSuccess()
+        return BaseRespone.<UserRespone>updateSuccess()
                 .setPaylot(userService.updateUser(id,userRequest));
     }
     @PutMapping("/{id}/enable")
